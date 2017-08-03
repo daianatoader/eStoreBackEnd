@@ -1,6 +1,7 @@
 .springBeans
 bin
 target/
+resources/application.properties
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
