@@ -38,13 +38,13 @@ public class Client {
     private String email;
 
     @Column(name = "phone")
-    private long phone;
+    private Long phone;
 
     @Column(name = "adress")
     private String adress;
 
     @Column(name = "card_number")
-    private int card_number;
+    private Integer card_number;
 
     public Client( ){}
 
@@ -96,11 +96,11 @@ public class Client {
         this.email = email;
     }
 
-    public long getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -112,11 +112,11 @@ public class Client {
         this.adress = adress;
     }
 
-    public int getCard_number() {
+    public Integer getCard_number() {
         return card_number;
     }
 
-    public void setCard_number(int card_number) {
+    public void setCard_number(Integer card_number) {
         this.card_number = card_number;
     }
 }
