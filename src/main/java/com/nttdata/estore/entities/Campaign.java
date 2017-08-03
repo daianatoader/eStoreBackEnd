@@ -26,6 +26,7 @@ public class Campaign {
     private int discount;
 
 
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "product_campaign", joinColumns = {
             @JoinColumn(name = "campaign_id", nullable = false)},

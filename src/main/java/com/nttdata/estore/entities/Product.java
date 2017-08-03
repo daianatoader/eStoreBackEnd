@@ -1,6 +1,8 @@
 package com.nttdata.estore.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,17 +25,21 @@ public class Product {
     @Column(name = "price")
     private float price;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Section.class)
     @JoinColumn(name = "section_id", nullable = false)
     private Section section;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Brand.class)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     private Set<Campaign> campaigns;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     private Set<Order> orders;
 
