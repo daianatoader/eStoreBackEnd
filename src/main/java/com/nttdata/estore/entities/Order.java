@@ -1,23 +1,18 @@
 package com.nttdata.estore.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "orders")
-
+@Table(name = "order")
 public class Order {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
 
     @Column(name = "price")
     private float price;
@@ -26,11 +21,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-
     @Column(name = "shipping_method")
     @Enumerated(EnumType.STRING)
     private ShippingMethod shippingMethod;
-
 
     @Column(name = "order_status")
     @Enumerated(EnumType.STRING)
@@ -42,11 +35,12 @@ public class Order {
     private Client client;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "order_products", joinColumns = {
-            @JoinColumn(name = "order_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "product_id",
-                    nullable = false)})
+    @JoinTable(name = "order_product", joinColumns = {@JoinColumn(name = "order_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "product_id", nullable = false)})
     private Set<Product> products;
+
+    public Order() {
+    }
 
     public Order(float price, PaymentMethod paymentMethod, ShippingMethod shippingMethod, OrderStatus orderStatus) {
         this.price = price;
@@ -56,15 +50,12 @@ public class Order {
         this.products = new HashSet<Product>(0);
     }
 
-    public Order() {
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public float getPrice() {

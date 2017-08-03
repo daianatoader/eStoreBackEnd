@@ -1,6 +1,5 @@
 package com.nttdata.estore.entities;
 
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name = "section")
 public class Section {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -51,5 +49,4 @@ public class Section {
     public void setProducts(Product product) {
         this.products.add(product);
     }
-
 }
