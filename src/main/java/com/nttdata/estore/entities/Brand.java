@@ -1,9 +1,16 @@
 package com.nttdata.estore.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "brand")
 public class Brand {
@@ -18,7 +25,8 @@ public class Brand {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "brand")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
     private Set<Product> products;
 
     public Brand() {
