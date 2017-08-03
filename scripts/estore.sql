@@ -28,7 +28,7 @@ PRIMARY KEY (id));
 
 CREATE TABLE orders(
 id int not null auto_increment, 
-price float, 
+price not null float,
 payment_method varchar(100), 
 shipping_method varchar(100), 
 order_status varchar(100),
@@ -45,7 +45,7 @@ CREATE TABLE product
 (id int not null auto_increment, 
 product_name varchar(500),
 details varchar(500),
-price float, 
+price not null float,
 section_id int, 
 brand_id int,  
 PRIMARY KEY (id),
