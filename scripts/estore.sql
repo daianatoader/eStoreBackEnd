@@ -66,7 +66,7 @@ CREATE TABLE campaign (
 id int not null auto_increment,
 details varchar(200),
 period varchar(100),
-discount int,
+discount not null int,
 PRIMARY KEY (id));
 
 CREATE TABLE product_campaign(
