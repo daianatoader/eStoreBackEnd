@@ -13,7 +13,7 @@ public class Section {
     private int id;
 
     @Column(name = "section_name")
-    private String sectionName;
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "section")
     private Set<Product> products;
@@ -21,8 +21,8 @@ public class Section {
     public Section() {
     }
 
-    public Section(String sectionName) {
-        this.sectionName = sectionName;
+    public Section(String name) {
+        this.name = name;
         this.products = new HashSet<Product>(0);
     }
 
@@ -34,12 +34,12 @@ public class Section {
         this.id = id;
     }
 
-    public String getSectionName() {
-        return sectionName;
+    public String getName() {
+        return name;
     }
 
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Product> getProducts() {

@@ -1,13 +1,10 @@
 package com.nttdata.estore.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 @Entity
 @Table(name = "brand")
 public class Brand {
@@ -17,7 +14,7 @@ public class Brand {
     private int id;
 
     @Column(name = "brand_name")
-    private String brandName;
+    private String name;
 
     @Column(name = "description")
     private String description;
@@ -28,8 +25,8 @@ public class Brand {
     public Brand() {
     }
 
-    public Brand(String brandName, String description) {
-        this.brandName = brandName;
+    public Brand(String name, String description) {
+        this.name = name;
         this.description = description;
         this.products = new HashSet<Product>(0);
     }
@@ -42,12 +39,12 @@ public class Brand {
         this.id = id;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getName() {
+        return name;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
