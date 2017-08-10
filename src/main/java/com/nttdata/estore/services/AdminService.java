@@ -12,6 +12,19 @@ public class AdminService {
     private AdminRepository adminRepository;
 
     public Iterable<Admin> findAll() {
+
         return adminRepository.findAll();
+    }
+
+    public Admin getAdmin(int id) {
+        return adminRepository.findOne(id);
+    }
+
+    public void deleteAdmin(int id) {
+        adminRepository.delete(id);
+    }
+
+    public void saveOrUpdateAdmin(Admin admin) {
+        adminRepository.save(admin);
     }
 }
