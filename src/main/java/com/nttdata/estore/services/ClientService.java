@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
@@ -14,4 +13,12 @@ public class ClientService {
     public Iterable<Client> findAll() {
         return clientRepository.findAll();
     }
+
+    public Client getById (int id){
+        return clientRepository.findOne(id);
+    }
+
+    public void deleteClient(int id) { clientRepository.delete(id); }
+
+    public void  createClient(Client client) { clientRepository.save(client); }
 }
