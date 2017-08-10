@@ -11,11 +11,19 @@ public class CampaignService {
     @Autowired
     private CampaignRepository campaignRepository;
 
-    public Iterable<Campaign> findAll() { return campaignRepository.findAll(); }
+    public Iterable<Campaign> findAll() {
+        return campaignRepository.findAll();
+    }
 
-    public Campaign getById (int id){ return campaignRepository.findOne(id); }
+    public Campaign getCampaign(int id) {
+        return campaignRepository.findOne(id);
+    }
 
-    public void deleteCampaign(int id) { campaignRepository.delete(id); }
+    public void deleteCampaign(int id) {
+        campaignRepository.delete(id);
+    }
 
-    public void  createCampaign(Campaign campaign) { campaignRepository.save(campaign); }
+    public void saveOrUpdateCampaign(Campaign campaign) {
+        campaignRepository.save(campaign);
+    }
 }

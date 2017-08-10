@@ -5,7 +5,6 @@ import com.nttdata.estore.services.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,14 +15,13 @@ public class CampaignController {
     private CampaignService campaignService;
 
     @GetMapping(path = "/campaigns")
-    public @ResponseBody
-    Iterable<Campaign> getAllCampaigns() {
+    public @ResponseBody Iterable<Campaign> getAllCampaigns() {
         return campaignService.findAll();
     }
 
     @GetMapping(path = "/campaigns/{id}")
-    public ResponseEntity getCampaigns(@PathVariable("id") int id){
-        Campaign campaign = campaignService.getById(id);
+    public ResponseEntity getCampaigns(@PathVariable("id") int id) {
+        Campaign campaign = campaignService.getCampaign(id);
         if (campaign == null) {
             return new ResponseEntity("No Campaign found for id " + id, HttpStatus.NOT_FOUND);
         }
@@ -31,23 +29,24 @@ public class CampaignController {
         return new ResponseEntity(campaign, HttpStatus.OK);
     }
 
-    @DeleteMapping(path= "/campaigns/{id}")
-    public ResponseEntity deleteCampaign(@PathVariable int id){
+    @DeleteMapping(path = "/campaigns/{id}")
+    public ResponseEntity deleteCampaign(@PathVariable int id) {
         campaignService.deleteCampaign(id);
-        return new ResponseEntity(id,HttpStatus.OK);
+        return new ResponseEntity(id, HttpStatus.OK);
     }
 
     @PostMapping(path = "/campaigns")
     public ResponseEntity createCampaign(@RequestBody Campaign campaign) {
-        campaignService.createCampaign(campaign);
+        campaignService.saveOrUpdateCampaign(campaign);
         return new ResponseEntity(campaign, HttpStatus.OK);
     }
 
     @PutMapping(path = "/campaigns/{id}")
     public ResponseEntity updateCampaign(@PathVariable int id, @RequestBody Campaign campaign) {
-        Campaign oldCampaign = campaignService.getById(id);
+        // TODO check method
+        Campaign oldCampaign = campaignService.getCampaign(id);
         oldCampaign = campaign;
-        campaignService.createCampaign(oldCampaign);
+        campaignService.saveOrUpdateCampaign(oldCampaign);
         if (null == oldCampaign) {
             return new ResponseEntity("No Campaign found for id " + id, HttpStatus.NOT_FOUND);
         }

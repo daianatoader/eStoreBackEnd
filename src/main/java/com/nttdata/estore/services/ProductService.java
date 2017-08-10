@@ -15,9 +15,15 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getById (int id){ return productRepository.findOne(id); }
+    public Product getProduct(int id) {
+        return productRepository.findOne(id);
+    }
 
-    public void deleteProduct(int id) { productRepository.delete(id); }
+    public void deleteProduct(int id) {
+        productRepository.delete(id);
+    }
 
-    public void  createProduct(Product product) { productRepository.save(product); }
+    public void saveOrUpdateProduct(Product product) {
+        productRepository.save(product);
+    }
 }
