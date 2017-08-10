@@ -1,7 +1,7 @@
 package com.nttdata.estore.controllers;
 
-import com.nttdata.estore.entities.Campaign;
-import com.nttdata.estore.services.CampaignService;
+import com.nttdata.estore.entities.Client;
+import com.nttdata.estore.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/campaign")
-public class CampaignController {
+@RequestMapping(path = "/client")
+public class ClientController {
 
     @Autowired
-    private CampaignService campaignService;
+    private ClientRepository clientService;
 
-    @GetMapping(path = "/allCampaigns")
+    @GetMapping(path = "/allClients")
     public @ResponseBody
-    Iterable<Campaign> getAllCampaigns() {
-        return campaignService.findAll();
+    Iterable<Client> getAllClients() {
+        return clientService.findAll();
     }
 }

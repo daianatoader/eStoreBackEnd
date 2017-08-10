@@ -3,9 +3,14 @@ package com.nttdata.estore.controllers;
 import com.nttdata.estore.entities.Admin;
 import com.nttdata.estore.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin
@@ -20,7 +25,9 @@ public class AdminController {
         return adminService.findAll();
     }
 
-    @GetMapping(path = "/admins/{id}")
+
+
+@GetMapping(path = "/admins/{id}")
     public ResponseEntity getAdmin(@PathVariable("id") int id) {
         Admin admin = adminService.getAdmin(id);
         if (admin == null) {
@@ -38,8 +45,7 @@ public class AdminController {
     @PostMapping(path = "/admins")
     public ResponseEntity createAdmin(@RequestBody Admin admin) {
         adminService.createAdmin(admin);
-        return new ResponseEntity(admin, HttpStatus.OK);
-    }
+        return new ResponseEntity(admin, HttpStatus.OK);}
 
     @PutMapping(path = "/admins/{id}")
     public ResponseEntity updateAdmin(@PathVariable int id, @RequestBody Admin admin) {

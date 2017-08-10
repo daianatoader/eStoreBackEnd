@@ -27,5 +27,4 @@ public class AdminService {
     public void createAdmin(Admin admin) {
         adminRepository.save(admin);
     }
-
 }

@@ -5,18 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "client")
 public class Client {
-
-    public Client(String username, String parola, String first_name, String last_name, String email, long phone, String adress, int card_number) {
-        this.username = username;
-        this.parola = parola;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.phone = phone;
-        this.adress = adress;
-        this.card_number = card_number;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,14 +13,14 @@ public class Client {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "parola")
-    private String parola;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -41,19 +29,28 @@ public class Client {
     private Long phone;
 
     @Column(name = "adress")
-    private String adress;
+    private String address;
 
     @Column(name = "card_number")
-    private Integer card_number;
+    private Integer cardNumber;
 
-    public Client( ){}
-
-    public void setId(int id) {
-        this.id = id;
+    public Client(String username, String password, String firstName, String lastName, String email, Long phone, String address, Integer cardNumber) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.cardNumber = cardNumber;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -64,28 +61,28 @@ public class Client {
         this.username = username;
     }
 
-    public String getParola() {
-        return parola;
+    public String getPassword() {
+        return password;
     }
 
-    public void setParola(String parola) {
-        this.parola = parola;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -104,19 +101,19 @@ public class Client {
         this.phone = phone;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Integer getCard_number() {
-        return card_number;
+    public Integer getCardNumber() {
+        return cardNumber;
     }
 
-    public void setCard_number(Integer card_number) {
-        this.card_number = card_number;
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }
