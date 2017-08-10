@@ -1,7 +1,8 @@
 package com.nttdata.estore.repositories;
 
+
 import com.nttdata.estore.entities.Product;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 }
