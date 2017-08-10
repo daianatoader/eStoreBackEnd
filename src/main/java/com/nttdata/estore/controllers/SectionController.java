@@ -38,7 +38,7 @@ public class SectionController {
 
     @PostMapping(path = "/sections")
     public ResponseEntity createSection(@RequestBody Section section) {
-        sectionService.createSection(section);
+        sectionService.saveOrUpdateSection(section);
         return new ResponseEntity(section, HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class SectionController {
     public ResponseEntity updateSection(@PathVariable int id, @RequestBody Section section) {
         Section oldSection = sectionService.getSection(id);
         oldSection = section;
-        sectionService.createSection(oldSection);
+        sectionService.saveOrUpdateSection(oldSection);
         if (null == oldSection) {
             return new ResponseEntity("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
         }

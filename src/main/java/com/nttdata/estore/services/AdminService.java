@@ -24,7 +24,7 @@ public class AdminService {
         adminRepository.delete(id);
     }
 
-    public void createAdmin(Admin admin) {
+    public void saveOrUpdateAdmin(Admin admin) {
         adminRepository.save(admin);
     }
 }

@@ -24,7 +24,7 @@ public class SectionService {
         sectionRepository.delete(id);
     }
 
-    public void createSection(Section section) {
+    public void saveOrUpdateSection(Section section) {
         sectionRepository.save(section);
     }
 }
