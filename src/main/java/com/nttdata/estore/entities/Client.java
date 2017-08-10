@@ -1,6 +1,8 @@
 package com.nttdata.estore.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -34,6 +36,9 @@ public class Client {
     @Column(name = "card_number")
     private Integer cardNumber;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<Order> orders;
+
     public Client(String username, String password, String firstName, String lastName, String email, Long phone, String address, Integer cardNumber) {
         this.username = username;
         this.password = password;
@@ -43,8 +48,10 @@ public class Client {
         this.phone = phone;
         this.address = address;
         this.cardNumber = cardNumber;
+        this.orders = new HashSet<Order>(0);
     }
 
+    public Client(){}
     public int getId() {
         return id;
     }
@@ -116,4 +123,8 @@ public class Client {
     public void setCardNumber(Integer cardNumber) {
         this.cardNumber = cardNumber;
     }
+
+    public Set<Order> getOrders(){return orders;}
+
+    public void setOrders(Order order) {this.orders.add(order);}
 }
