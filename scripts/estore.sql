@@ -12,6 +12,7 @@ CREATE table brand(
 id int not null auto_increment,
 brand_name varchar(100) unique,
 description varchar(500),
+photo_path varchar(255),
 PRIMARY KEY (id));
 
 CREATE table client(

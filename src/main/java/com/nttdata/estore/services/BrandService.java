@@ -14,4 +14,16 @@ public class BrandService {
     public Iterable<Brand> getAllBrands() {
         return brandRepository.findAll();
     }
+
+    public Brand getBrand(int id) {
+        return brandRepository.findOne(id);
+    }
+
+    public void saveOrUpdateBrand(Brand brand) {
+        brandRepository.save(brand);
+    }
+
+    public void deleteBrand(int id) {
+        brandRepository.delete(id);
+    }
 }
