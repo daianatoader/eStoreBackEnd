@@ -5,12 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name="campaign")
-
-
+@Table(name = "campaign")
 public class Campaign {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -22,19 +18,16 @@ public class Campaign {
     @Column(name = "period")
     private String period;
 
-    @Column (name = "discount")
+    @Column(name = "discount")
     private int discount;
 
-
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "product_campaign", joinColumns = {
-            @JoinColumn(name = "campaign_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "product_id",
-                    nullable = false)})
+    @JoinTable(name = "product_campaign", joinColumns = {@JoinColumn(name = "campaign_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "product_id", nullable = false)})
     private Set<Product> products;
 
-    public Campaign() { }
+    public Campaign() {
+    }
 
     public Campaign(String details, String period, int discount) {
         this.details = details;
