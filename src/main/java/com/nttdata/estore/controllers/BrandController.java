@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @CrossOrigin
 public class BrandController {
@@ -33,7 +32,7 @@ public class BrandController {
 
     @PostMapping("/brands")
     public ResponseEntity add(@RequestBody Brand brand) {
-        brandService.addBrand(brand);
+        brandService.saveOrUpdateBrand(brand);
         return new ResponseEntity(brand, HttpStatus.OK);
     }
 
@@ -44,7 +43,7 @@ public class BrandController {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
         }
         oldBrand = brand;
-        brandService.addBrand(oldBrand);
+        brandService.saveOrUpdateBrand(oldBrand);
         return new ResponseEntity(oldBrand, HttpStatus.OK);
     }
 
@@ -53,8 +52,7 @@ public class BrandController {
         if (null == getBrand(id)) {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
         }
-        brandService.delete(id);
+        brandService.deleteBrand(id);
         return new ResponseEntity(id, HttpStatus.OK);
-
     }
 }
