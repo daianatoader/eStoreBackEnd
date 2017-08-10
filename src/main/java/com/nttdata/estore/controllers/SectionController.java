@@ -44,6 +44,7 @@ public class SectionController {
 
     @PutMapping(path = "/sections/{id}")
     public ResponseEntity updateSection(@PathVariable int id, @RequestBody Section section) {
+        //TODO check method
         Section oldSection = sectionService.getSection(id);
         oldSection = section;
         sectionService.saveOrUpdateSection(oldSection);

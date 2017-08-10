@@ -42,6 +42,7 @@ public class AdminController {
 
     @PutMapping(path = "/admins/{id}")
     public ResponseEntity updateAdmin(@PathVariable int id, @RequestBody Admin admin) {
+        //TODO check method
         Admin oldAdmin = adminService.getAdmin(id);
         oldAdmin = admin;
         adminService.saveOrUpdateAdmin(oldAdmin);
