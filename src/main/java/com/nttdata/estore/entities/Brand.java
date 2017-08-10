@@ -19,6 +19,9 @@ public class Brand {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "photo_path")
+    private String photoPath;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
     private Set<Product> products;
 
@@ -53,6 +56,14 @@ public class Brand {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public Set<Product> getProducts() {
