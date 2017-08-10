@@ -14,4 +14,16 @@ public class ProductService {
     public Iterable<Product> findAll() {
         return productRepository.findAll();
     }
+
+    public Product getProduct(int id) {
+        return productRepository.findOne(id);
+    }
+
+    public void deleteProduct(int id) {
+        productRepository.delete(id);
+    }
+
+    public void saveOrUpdateProduct(Product product) {
+        productRepository.save(product);
+    }
 }
