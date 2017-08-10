@@ -1,56 +1,49 @@
 package com.nttdata.estore.entities;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "admin")
-
 public class Admin {
-
-    public Admin(String username, String PAROLA) {
-        this.username = username;
-        this.PAROLA = PAROLA;
-    }
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int ID;
+    private int id;
 
     @Column(name = "username")
     private String username;
 
-    @Column(name = "parola")
-    private String PAROLA;
-
-
+    @Column(name = "password")
+    private String password;
 
     public Admin() {}
 
-    public int getID() {
-
-        return ID;
+    public Admin(String username, String password) {
+        this.setUsername(username);
+        this.setPassword(password);
     }
 
-    public void setID( int ID ) {
+    public int getId() {
+        return id;
+    }
 
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
-
         return username;
     }
 
-    public void setUsername( String name ) {
-
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPAROLA() {
-
-        return PAROLA;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPAROLA( String PAROLA){
-
-        this.PAROLA = PAROLA;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,6 +1,5 @@
 package com.nttdata.estore.entities;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,14 +9,13 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Column(name = "product_name")
-    private String productName;
+    private String name;
 
     @Column(name = "details")
     private String details;
@@ -46,8 +44,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, String details, float price, Section section, Brand brand) {
-        this.productName = productName;
+    public Product(String name, String details, float price, Section section, Brand brand) {
+        this.name = name;
         this.details = details;
         this.price = price;
         this.section = section;
@@ -64,12 +62,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDetails() {
