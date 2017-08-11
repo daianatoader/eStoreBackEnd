@@ -1,24 +1,33 @@
 package com.nttdata.estore.controllers;
+
 import com.nttdata.estore.entities.Order;
-import com.nttdata.estore.repositories.OrderRepository;
 import com.nttdata.estore.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller    // This means that this class is a Controller
-@RequestMapping(path="/order")
+@RestController
+@CrossOrigin
+
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping(path="/allOrders")
-    public @ResponseBody Iterable<Order> getAllOrders() {
-        // This returns a JSON or XML with the users
+    @GetMapping(path = "/orders")
+    public @ResponseBody
+    Iterable<Order> getAllOrders() {
         return orderService.findAll();
+    }
+
+    @GetMapping(path = "/orders/{id}")
+    public ResponseEntity getOrder(@PathVariable("id") int id) {
+        Order order = orderService.getById(id);
+        if (null == order) {
+            return new ResponseEntity("No Order found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(order, HttpStatus.OK);
     }
 }

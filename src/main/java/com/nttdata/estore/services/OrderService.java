@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
@@ -14,4 +13,9 @@ public class OrderService {
     public Iterable<Order> findAll() {
         return orderRepository.findAll();
     }
+
+    public Order getById (int id){
+        return orderRepository.findOne(id);
+    }
+
 }
