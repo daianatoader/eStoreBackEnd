@@ -12,6 +12,19 @@ public class SectionService {
     private SectionRepository sectionRepository;
 
     public Iterable<Section> findAll() {
+
         return sectionRepository.findAll();
+    }
+
+    public Section getSection(int id) {
+        return sectionRepository.findOne(id);
+    }
+
+    public void deleteSection(int id) {
+        sectionRepository.delete(id);
+    }
+
+    public void saveOrUpdateSection(Section section) {
+        sectionRepository.save(section);
     }
 }

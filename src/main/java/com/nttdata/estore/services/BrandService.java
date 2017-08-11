@@ -19,12 +19,11 @@ public class BrandService {
         return brandRepository.findOne(id);
     }
 
-    public void addBrand(Brand brand) {
+    public void saveOrUpdateBrand(Brand brand) {
         brandRepository.save(brand);
     }
 
-    public void delete(int id) {
+    public void deleteBrand(int id) {
         brandRepository.delete(id);
     }
-
 }
