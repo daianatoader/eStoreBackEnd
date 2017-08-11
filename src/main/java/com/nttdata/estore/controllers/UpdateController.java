@@ -28,8 +28,7 @@ public class UpdateController {
         // Brand brandToUpdate = brandService.getBrand(id);
         try {
             Files.copy(file.getInputStream(), rootLocation.resolve(file.getOriginalFilename()));
-            // brandToUpdate.setPhotoPath("/app/images/"+file.getOriginalFilename());
-            // brandService.addBrand(brandToUpdate);
+
 
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
