@@ -13,4 +13,9 @@ public class OrderService {
     public Iterable<Order> findAll() {
         return orderRepository.findAll();
     }
+
+    public Order getById (int id){
+        return orderRepository.findOne(id);
+    }
+
 }
