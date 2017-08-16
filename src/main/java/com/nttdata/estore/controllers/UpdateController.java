@@ -11,12 +11,13 @@ import java.nio.file.Paths;
 @RestController
 @CrossOrigin
 public class UpdateController {
+    public static String photoPath = null;
 
     @PostMapping("/update")
     @ResponseBody
     public String uploadPhoto(@RequestParam("photo") MultipartFile file) {
         // TODO change the path
-        final Path rootLocation = Paths.get("D:/Practica 2017/eStoreFrontEnd/src/app/images");
+        final Path rootLocation = Paths.get("D:/Practica/angular-tour-of-heroes/src/app/images");
         if (file.isEmpty()) {
             return "error";
         }
@@ -25,6 +26,7 @@ public class UpdateController {
         } catch (IOException e) {
             return "error";
         }
+        photoPath = "app/images/" + file.getOriginalFilename();
         return file.getOriginalFilename();
     }
 }

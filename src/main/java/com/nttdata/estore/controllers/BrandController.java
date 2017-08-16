@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+
+import static com.nttdata.estore.controllers.UpdateController.photoPath;
+
 @RestController
 @CrossOrigin
 public class BrandController {
@@ -39,6 +43,7 @@ public class BrandController {
     @PutMapping("/brands/{id}")
     public ResponseEntity update(@PathVariable("id") int id, @RequestBody Brand brand) {
         Brand oldBrand = brandService.getBrand(id);
+        brand.setPhotoPath(photoPath);
         if (null == oldBrand) {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
         }
@@ -52,6 +57,10 @@ public class BrandController {
         if (null == getBrand(id)) {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
         }
+        // TODO change the path
+        File file = new File("D:/Practica/angular-tour-of-heroes/src/" + brandService.getBrand(id).getPhotoPath());
+        if (file.exists())
+            file.delete();
         brandService.deleteBrand(id);
         return new ResponseEntity(id, HttpStatus.OK);
     }
