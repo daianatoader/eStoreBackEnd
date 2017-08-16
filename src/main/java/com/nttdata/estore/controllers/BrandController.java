@@ -3,6 +3,7 @@ package com.nttdata.estore.controllers;
 import com.nttdata.estore.entities.Brand;
 import com.nttdata.estore.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,14 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+    @Value("${app.images}")
+    private String appImage;
+
+    @Value("${frontend.resources.folder}")
+    private String resourcesLocation;
+
     @GetMapping(path = "/brands")
-    public @ResponseBody
-    Iterable<Brand> getAllBrands() {
+    public @ResponseBody Iterable<Brand> getAllBrands() {
         return brandService.getAllBrands();
     }
 
@@ -43,6 +49,9 @@ public class BrandController {
     @PutMapping("/brands/{id}")
     public ResponseEntity update(@PathVariable("id") int id, @RequestBody Brand brand) {
         Brand oldBrand = brandService.getBrand(id);
+        if (oldBrand.getPhotoPath() != null) {
+            deleteFileFromDisk(oldBrand.getPhotoPath());
+        }
         brand.setPhotoPath(photoPath);
         if (null == oldBrand) {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
@@ -57,13 +66,15 @@ public class BrandController {
         if (null == getBrand(id)) {
             return new ResponseEntity("No Brand found", HttpStatus.NOT_FOUND);
         }
-        // TODO change the path
-        File file = new File("D:/Practica/angular-tour-of-heroes/src/" + brandService.getBrand(id).getPhotoPath());
-        if (file.exists())
-            file.delete();
+        deleteFileFromDisk(brandService.getBrand(id).getPhotoPath());
         brandService.deleteBrand(id);
         return new ResponseEntity(id, HttpStatus.OK);
     }
 
+    private void deleteFileFromDisk(String filePath) {
+        File file = new File(resourcesLocation + filePath);
+        if (file.exists())
+            file.delete();
+    }
 
 }
