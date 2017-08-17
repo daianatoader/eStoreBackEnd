@@ -47,6 +47,7 @@ CREATE TABLE product
 product_name varchar(500),
 details varchar(500),
 price float not null,
+photo_path varchar(255),
 section_id int,
 brand_id int,
 PRIMARY KEY (id),
