@@ -1,6 +1,8 @@
-package com.nttdata.estore.security;
+package com.nttdata.estore.repositories;
 
+import com.nttdata.estore.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**

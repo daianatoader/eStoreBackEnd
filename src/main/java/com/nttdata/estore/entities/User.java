@@ -1,4 +1,4 @@
-package com.nttdata.estore.security;
+package com.nttdata.estore.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

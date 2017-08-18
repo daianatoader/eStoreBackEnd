@@ -1,5 +1,7 @@
 package com.nttdata.estore.security;
 
+import com.nttdata.estore.entities.Authority;
+import com.nttdata.estore.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -12,7 +14,7 @@ public final class JwtUserFactory {
 
     public static JwtUser create(User user) {
         return new JwtUser(user.getId(), user.getUsername(), user.getFirstname(), user.getLastname(), user.getEmail(),
-                user.getPassword(), mapToGrantedAuthorities(user.getAuthorities()), user.getEnabled(),
+                user.getPassword(), mapToGrantedAuthorities(user.getAuthorities()),
                 user.getLastPasswordResetDate());
     }
 
