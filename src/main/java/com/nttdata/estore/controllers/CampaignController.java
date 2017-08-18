@@ -26,19 +26,19 @@ public class CampaignController {
             return new ResponseEntity("No Campaign found for id " + id, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity(campaign, HttpStatus.OK);
+        return ResponseEntity.ok(campaign);
     }
 
     @DeleteMapping(path = "/campaigns/{id}")
     public ResponseEntity deleteCampaign(@PathVariable int id) {
         campaignService.deleteCampaign(id);
-        return new ResponseEntity(id, HttpStatus.OK);
+        return ResponseEntity.ok(id);
     }
 
     @PostMapping(path = "/campaigns")
     public ResponseEntity createCampaign(@RequestBody Campaign campaign) {
         campaignService.saveOrUpdateCampaign(campaign);
-        return new ResponseEntity(campaign, HttpStatus.OK);
+        return ResponseEntity.ok(campaign);
     }
 
     @PutMapping(path = "/campaigns/{id}")
@@ -50,6 +50,6 @@ public class CampaignController {
         if (null == oldCampaign) {
             return new ResponseEntity("No Campaign found for id " + id, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(oldCampaign, HttpStatus.OK);
+        return ResponseEntity.ok(oldCampaign);
     }
 }
