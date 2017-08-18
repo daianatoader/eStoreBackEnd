@@ -38,13 +38,13 @@ public class OrderController {
     public ResponseEntity updateOrder(@PathVariable int id) {
         // TODO check method
         Order oldOrder = orderService.getOrder(id);
+        if (null == oldOrder) {
+            return new ResponseEntity("No Order found for ID " + id, HttpStatus.NOT_FOUND);
+        }
         if(oldOrder.getOrderStatus().name().equals("WAITING") || oldOrder.getOrderStatus().name().equals("OPEN") ) {
             oldOrder.setOrderStatus(OrderStatus.CANCELED);
         }
             orderService.saveOrUpdateOrder(oldOrder);
-        if (null == oldOrder) {
-            return new ResponseEntity("No Order found for ID " + id, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity(oldOrder, HttpStatus.OK);
     }
 }
