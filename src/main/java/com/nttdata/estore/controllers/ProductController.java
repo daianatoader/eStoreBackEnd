@@ -15,7 +15,8 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping(path = "/products")
-    public @ResponseBody Iterable<Product> getAllProducts() {
+    public @ResponseBody
+    Iterable<Product> getAllProducts() {
         return productService.findAll();
     }
 
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @PostMapping(path = "/products")
-    public ResponseEntity createSection(@RequestBody Product product) {
+    public ResponseEntity createProduct(@RequestBody Product product) {
         productService.saveOrUpdateProduct(product);
         return new ResponseEntity(product, HttpStatus.OK);
     }

@@ -1,7 +1,6 @@
 package com.nttdata.estore.controllers;
 
 import com.nttdata.estore.entities.Order;
-import com.nttdata.estore.entities.OrderStatus;
 import com.nttdata.estore.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,17 +30,21 @@ public class OrderController {
         return new ResponseEntity(order, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/orders")
+    public ResponseEntity createOrder(@RequestBody Order order) {
+        orderService.saveOrUpdateOrder(order);
+        return new ResponseEntity(order, HttpStatus.OK);
+    }
+
     @PutMapping(path = "/orders/{id}")
-    public ResponseEntity updateOrder(@PathVariable int id) {
+    public ResponseEntity updateOrder(@PathVariable int id, @RequestBody Order order) {
         // TODO check method
         Order oldOrder = orderService.getOrder(id);
         if (null == oldOrder) {
             return new ResponseEntity("No Order found for ID " + id, HttpStatus.NOT_FOUND);
         }
-        if(oldOrder.getOrderStatus().name().equals("WAITING") || oldOrder.getOrderStatus().name().equals("OPEN") ) {
-            oldOrder.setOrderStatus(OrderStatus.CANCELED);
-        }
-            orderService.saveOrUpdateOrder(oldOrder);
+        oldOrder = order;
+        orderService.saveOrUpdateOrder(oldOrder);
         return new ResponseEntity(oldOrder, HttpStatus.OK);
     }
 }
