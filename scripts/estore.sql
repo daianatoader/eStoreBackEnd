@@ -1,12 +1,33 @@
-drop schema estore;
+drop schema if exists estore;
 create database estore;
 use estore;
 
-CREATE table admin (
-id int not null auto_increment,
+CREATE TABLE user(
+id int(11) NOT NULL auto_increment,
 username varchar(50),
-password varchar(500),
+password varchar(100),
+first_name varchar(50),
+last_name varchar(50),
+email varchar(100),
+phone long,
+adress varchar(100),
+card_number int,
+enabled tinyint(1) DEFAULT NULL,
+last_password_reset_date date DEFAULT NULL,
 PRIMARY KEY (id));
+
+CREATE TABLE authority (
+id int(11) NOT NULL,
+name varchar(20) NOT NULL,
+PRIMARY KEY (id));
+
+CREATE TABLE user_authority (
+id int(11) NOT NULL auto_increment,
+user_id int(11) NOT NULL,
+authority_id int(11) NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (user_id) REFERENCES user(id),
+FOREIGN KEY (authority_id) REFERENCES authority(id));
 
 CREATE table brand(
 id int not null auto_increment,
@@ -15,17 +36,6 @@ description varchar(500),
 photo_path varchar(255),
 PRIMARY KEY (id));
 
-CREATE table client(
-id int not null auto_increment,
-username varchar(100),
-password varchar(100),
-first_name varchar(100),
-last_name varchar(100),
-email varchar(100),
-phone long,
-adress varchar(100),
-card_number int,
-PRIMARY KEY (id));
 
 CREATE TABLE orders(
 id int not null auto_increment,
@@ -33,9 +43,9 @@ price float not null,
 payment_method varchar(100),
 shipping_method varchar(100),
 order_status varchar(100),
-client_id int,
+user_id int,
 PRIMARY KEY (id),
-FOREIGN KEY (client_id) REFERENCES client(id));
+FOREIGN KEY (user_id) REFERENCES user(id));
 
 CREATE TABLE section (
 id int not null auto_increment,
@@ -47,6 +57,7 @@ CREATE TABLE product
 product_name varchar(500),
 details varchar(500),
 price float not null,
+photo_path varchar(255),
 section_id int,
 brand_id int,
 PRIMARY KEY (id),

@@ -23,7 +23,7 @@ public class Brand {
     private String photoPath;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<Product>();
 
     public Brand() {
     }
@@ -70,7 +70,7 @@ public class Brand {
         return products;
     }
 
-    public void setProducts(Product product) {
-        this.products.add(product);
+    public void setProducts(Set<Product> products) {
+        this.products.addAll(products);
     }
 }
