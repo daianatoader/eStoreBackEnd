@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @PostMapping(path = "/products")
-    public ResponseEntity createSection(@RequestBody Product product) {
+    public ResponseEntity createProduct(@RequestBody Product product) {
         productService.saveOrUpdateProduct(product);
         return new ResponseEntity(product, HttpStatus.OK);
     }
