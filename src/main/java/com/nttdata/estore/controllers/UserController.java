@@ -1,6 +1,9 @@
 package com.nttdata.estore.controllers;
 
+import com.nttdata.estore.entities.Authority;
 import com.nttdata.estore.entities.User;
+import com.nttdata.estore.security.AuthorityName;
+import com.nttdata.estore.services.AuthorityService;
 import com.nttdata.estore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,20 +17,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthorityService authorityService;
+
     @GetMapping(path = "/users")
     public @ResponseBody
     Iterable<User> getAllUsers() {
         return userService.findAll();
     }
 
-    @GetMapping(path = "/users/{id}")
-    public ResponseEntity getUser(@PathVariable("id") long id) {
-        User user = userService.getUser(id);
-        if (null == user) {
-            return new ResponseEntity("No user found for ID " + id, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity(user, HttpStatus.OK);
-    }
+
 
     @GetMapping(path = "/users/{username}")
     public ResponseEntity getByUsername(@PathVariable("username") String username) {
@@ -47,6 +46,8 @@ public class UserController {
     @PostMapping(path = "/users")
     public ResponseEntity createUser(@RequestBody User user) {
         userService.saveOrUpdateUser(user);
+        Authority auth = authorityService.getByName(AuthorityName.ROLE_USER);
+        user.getAuthorities().add(auth);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 

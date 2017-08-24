@@ -1,23 +1,20 @@
 package com.nttdata.estore.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nttdata.estore.security.AuthorityName;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "username")
@@ -50,20 +47,20 @@ public class User {
 
 
     @Column(name = "enabled")
-    @NotNull
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @Column(name = "last_password_reset_date")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
-    private Date lastPasswordResetDate;
+    private Date lastPasswordResetDate = new Date();
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private List<Authority> authorities;
+    private List<Authority> authorities = new ArrayList<>();
 
-
+    public User() {
+    }
     public Long getId() {
         return id;
     }

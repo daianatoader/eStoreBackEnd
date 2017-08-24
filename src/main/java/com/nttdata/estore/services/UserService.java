@@ -26,7 +26,7 @@ public class UserService {
         userRepository.delete(id);
     }
 
-    public void saveOrUpdateUser(User User) {
-        userRepository.save(User);
+    public void saveOrUpdateUser(User user) {
+        userRepository.save(user);
     }
 }
