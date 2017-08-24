@@ -1,13 +1,9 @@
 package com.nttdata.estore.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nttdata.estore.security.AuthorityName;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
