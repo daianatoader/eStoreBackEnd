@@ -1,5 +1,7 @@
 package com.nttdata.estore.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,8 +38,9 @@ public class Client {
     @Column(name = "card_number")
     private Integer cardNumber;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "client")
-    private Set<Order> orders;
+    private Set<Order> orders = new HashSet<Order>();
 
     public Client(String username, String password, String firstName, String lastName, String email, Long phone, String address, Integer cardNumber) {
         this.username = username;
@@ -51,7 +54,9 @@ public class Client {
         this.orders = new HashSet<Order>(0);
     }
 
-    public Client(){}
+    public Client() {
+    }
+
     public int getId() {
         return id;
     }
@@ -124,7 +129,11 @@ public class Client {
         this.cardNumber = cardNumber;
     }
 
-    public Set<Order> getOrders(){return orders;}
+    public Set<Order> getOrders() {
+        return orders;
+    }
 
-    public void setOrders(Order order) {this.orders.add(order);}
+    public void setOrders(HashSet<Order> orders) {
+        this.orders.addAll(orders);
+    }
 }

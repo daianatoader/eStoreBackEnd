@@ -1,10 +1,9 @@
 package com.nttdata.estore.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -29,15 +28,14 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_product", joinColumns = {@JoinColumn(name = "order_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "product_id", nullable = false)})
-    private Set<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Order() {
     }
@@ -47,7 +45,7 @@ public class Order {
         this.paymentMethod = paymentMethod;
         this.shippingMethod = shippingMethod;
         this.orderStatus = orderStatus;
-        this.products = new HashSet<Product>(0);
+        this.products = new ArrayList<>(0);
     }
 
     public int getId() {
@@ -98,11 +96,11 @@ public class Order {
         this.client = client;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Product product) {
-        this.products.add(product);
+    public void setProducts(HashSet<Product> products) {
+        this.products.addAll(products);
     }
 }
