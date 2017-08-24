@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "price")
     private float price;
 
+    @Column(name = "photo_path")
+    private String photoPath;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, targetEntity = Section.class)
     @JoinColumn(name = "section_id", nullable = false)
@@ -100,6 +103,14 @@ public class Product {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public Set<Campaign> getCampaigns() {

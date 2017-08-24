@@ -19,14 +19,12 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    @Value("${app.images}")
-    private String appImage;
-
     @Value("${frontend.resources.folder}")
     private String resourcesLocation;
 
     @GetMapping(path = "/brands")
-    public @ResponseBody Iterable<Brand> getAllBrands() {
+    public @ResponseBody
+    Iterable<Brand> getAllBrands() {
         return brandService.getAllBrands();
     }
 

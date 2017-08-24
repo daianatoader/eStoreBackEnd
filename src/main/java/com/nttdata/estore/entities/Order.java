@@ -27,7 +27,6 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -45,7 +44,7 @@ public class Order {
         this.paymentMethod = paymentMethod;
         this.shippingMethod = shippingMethod;
         this.orderStatus = orderStatus;
-        this.products = new ArrayList<Product>(0);
+        this.products = new ArrayList<>(0);
     }
 
     public int getId() {
@@ -100,7 +99,7 @@ public class Order {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(HashSet<Product> products) {
         this.products.addAll(products);
     }
 }
