@@ -8,6 +8,7 @@ import com.nttdata.estore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -44,6 +45,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/users")
+    @Transactional
     public ResponseEntity createUser(@RequestBody User user) {
         userService.saveOrUpdateUser(user);
         Authority auth = authorityService.getByName(AuthorityName.ROLE_USER);
