@@ -33,6 +33,6 @@ public class ShoppingCartController {
         if (order != null) {
             order.updatePrice();
         }
-        return new ResponseEntity(order, HttpStatus.OK);
+        return ResponseEntity.ok(order);
     }
 }

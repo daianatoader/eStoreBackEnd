@@ -103,4 +103,8 @@ public class Order {
     public void setProducts(HashSet<Product> products) {
         this.products.addAll(products);
     }
+
+    public void updatePrice() {
+        price = products.stream().map(Product::getPrice).mapToInt(Float::intValue).sum();
+    }
 }
