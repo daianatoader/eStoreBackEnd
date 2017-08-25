@@ -67,7 +67,7 @@ public class ProductController {
         if (null == oldProduct) {
             return new ResponseEntity("No Product found for ID " + id, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(oldProduct, HttpStatus.OK);
+        return new ResponseEntity(oldProduct, HttpStatus.NOT_FOUND);
     }
 
     private void deleteFileFromDisk(String filePath) {

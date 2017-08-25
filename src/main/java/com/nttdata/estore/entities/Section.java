@@ -16,7 +16,7 @@ public class Section {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "section")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<Product>();
 
     public Section() {
     }
@@ -46,7 +46,7 @@ public class Section {
         return products;
     }
 
-    public void setProducts(Product product) {
-        this.products.add(product);
+    public void setProducts(Set<Product> products) {
+        this.products.addAll(products);
     }
 }

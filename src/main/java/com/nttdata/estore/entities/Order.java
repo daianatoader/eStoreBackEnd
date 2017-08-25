@@ -29,8 +29,8 @@ public class Order {
     private OrderStatus orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_product", joinColumns = {@JoinColumn(name = "order_id", nullable = false)},
@@ -88,12 +88,12 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Client getClient() {
-        return client;
+    public User getUser() {
+        return user;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Product> getProducts() {
