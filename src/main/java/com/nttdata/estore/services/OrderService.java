@@ -25,7 +25,7 @@ public class OrderService {
 
     public void saveOrUpdateOrder(Order order) { orderRepository.save(order); }
 
-    public Order getOpenOrderForClient(User user){
+    public Order getOpenOrderForClient(User user) {
         List<Order> orders = new ArrayList<>();
         findAll().forEach(orders::add);
         return orders.stream() //

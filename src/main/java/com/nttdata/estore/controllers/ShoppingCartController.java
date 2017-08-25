@@ -1,11 +1,10 @@
 package com.nttdata.estore.controllers;
 
-import com.nttdata.estore.entities.Client;
 import com.nttdata.estore.entities.Order;
-import com.nttdata.estore.services.ClientService;
+import com.nttdata.estore.entities.User;
 import com.nttdata.estore.services.OrderService;
+import com.nttdata.estore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 public class ShoppingCartController {
     @Autowired
-    private ClientService clientService;
+    private UserService userService;
 
     @Autowired
     private OrderService orderService;
@@ -28,8 +27,8 @@ public class ShoppingCartController {
     @GetMapping(path = "/cart/{id}")
     @Transactional
     public ResponseEntity getOrder(@PathVariable("id") int id) {
-        Client client = clientService.getClient(1);
-        Order order = orderService.getOpenOrderForClient(client);
+        User user = userService.getUser(1);
+        Order order = orderService.getOpenOrderForClient(user);
         if (order != null) {
             order.updatePrice();
         }

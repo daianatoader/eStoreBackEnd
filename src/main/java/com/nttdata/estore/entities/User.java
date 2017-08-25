@@ -57,8 +57,8 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private List<Authority> authorities = new ArrayList<>();
 
-    public User() {
-    }
+    public User() {}
+
     public Long getId() {
         return id;
     }

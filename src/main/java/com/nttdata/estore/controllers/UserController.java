@@ -22,12 +22,9 @@ public class UserController {
     private AuthorityService authorityService;
 
     @GetMapping(path = "/users")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
+    public @ResponseBody Iterable<User> getAllUsers() {
         return userService.findAll();
     }
-
-
 
     @GetMapping(path = "/users/{username}")
     public ResponseEntity getByUsername(@PathVariable("username") String username) {
