@@ -22,15 +22,21 @@ public class UserController {
     private AuthorityService authorityService;
 
     @GetMapping(path = "/users")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
+    public @ResponseBody Iterable<User> getAllUsers() {
         return userService.findAll();
     }
 
-
-
     @GetMapping(path = "/users/{username}")
-    public ResponseEntity getByUsername(@PathVariable("username") String username) {
+    public ResponseEntity getByUsername(@PathVariable("username") int username) {
+        User user = userService.getUser(username);
+        if (null == user) {
+            return new ResponseEntity("No user found for username " + username, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(user, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/user/{username}")
+    public ResponseEntity getUser(@PathVariable("username") String username) {
         User user = userService.getByUsername(username);
         if (null == user) {
             return new ResponseEntity("No user found for username " + username, HttpStatus.NOT_FOUND);
