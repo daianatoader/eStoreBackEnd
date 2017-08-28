@@ -27,7 +27,16 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{username}")
-    public ResponseEntity getByUsername(@PathVariable("username") String username) {
+    public ResponseEntity getByUsername(@PathVariable("username") int username) {
+        User user = userService.getUser(username);
+        if (null == user) {
+            return new ResponseEntity("No user found for username " + username, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(user, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/user/{username}")
+    public ResponseEntity getUser(@PathVariable("username") String username) {
         User user = userService.getByUsername(username);
         if (null == user) {
             return new ResponseEntity("No user found for username " + username, HttpStatus.NOT_FOUND);
